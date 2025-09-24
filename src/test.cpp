@@ -1,7 +1,3 @@
-//
-// Created by vladyslav on 24/09/2025.
-//
-
 #include "banking.h"
 #include <iostream>
 
