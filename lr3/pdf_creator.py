@@ -1,34 +1,27 @@
 from fpdf import FPDF
 
 pdf = FPDF(orientation='P', unit='mm', format='A4')
+pdf.add_font("dejavu-sans", style="", fname="font/DejaVuSans.ttf", uni=True)
+
 pdf.add_page()
 
-pdf.add_font("dejavu-sans", style="", fname="font/DejaVuSans.ttf", uni=True)
 pdf.set_font(family="dejavu-sans", style="", size=18)
+pdf.set_text_color(255, 255, 255)
+pdf.set_fill_color(39, 111, 179)
+pdf.cell(0, 10, "Online Banking", ln=True, align="C", fill=True)
 pdf.ln(8)
 
-pdf.multi_cell(0, 10, "Hello World", ln=True, align='C')
-
 pdf.image("logo.png", x=60, y=None, w=90) 
+pdf.ln(1)
 
-headers = ["column header 1", "column header 2", "column header 3", "column header 4"]
-row_data = ["row 1, col 1", "row 1, col 2", "row 1, col 3", "row 1, col 4"]
-
-col_width = pdf.epw / 4  
-row_height = 10
-
-pdf.set_fill_color(200, 200, 200)
-for header in headers:
-    pdf.cell(col_width, row_height, header, border=1, align='C', fill=True)
-pdf.ln(row_height)
-
-for cell in row_data:
-    pdf.cell(col_width, row_height, cell, border=1, align='C')
-pdf.ln(row_height)
-
-pdf.add_page()
+pdf.set_text_color(0, 0, 0)
+pdf.set_font("dejavu-sans", "", 14)
+pdf.cell(0, 10, "Рисунок 1 – Logo", ln=True, align="C")
+pdf.ln(20)
 
 pdf.set_font(family="dejavu-sans", style="", size=14)
+pdf.set_text_color(0, 0, 0)
+
 paragraph = (
     "   Ідея проєкту полягає в розробці ефективного і безпечного вебзастосування "
     "для дистанційного банківського обслуговування, яке дозволить проводити "
@@ -40,4 +33,21 @@ paragraph = (
 )
 pdf.multi_cell(0, 8, paragraph, align='J')
 
-pdf.output("my_document.pdf")
+pdf.set_y(-10)
+pdf.set_font("dejavu-sans", "", 10)
+pdf.cell(0, 10, f"{pdf.page_no()}", align="R")
+
+pdf.ln(15)
+pdf.set_font(family="dejavu-sans", style="", size=14)
+
+paragraph1 = (
+    "   Метою роботи є створення програмного застосування для забезпечення віддаленого обслуговування клієнтів банку. "
+    "Клієнти зможуть виконувати необхідні дії через вебінтерфейс, а банк зможе зменшити витрати на фізичні відділення."
+    "Клієнти зможуть виконувати операції оплати послуг у будь-який час, бо в іншому випадку потребували б оплати у відділенні. "
+    "Банк буде посередником між постачальниками та клієнтами, а вебінтерфейс реалізує це. "
+    "Забезпечено соціальну систему, завдяки якій клієнти зможуть здійснювати перекази один між одним і написати невелике пояснення переказу, а отримувач побачить результат і повідомлення на балансі."
+)
+
+pdf.multi_cell(0, 8, paragraph1, align='J')
+
+pdf.output("my_pdf.pdf")
