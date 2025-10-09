@@ -9,7 +9,7 @@ add_library(banking SHARED
         include/banking.h
 )
 
-target_include_directories(banking PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(banking PUBLIC include)
 set_target_properties(banking PROPERTIES OUTPUT_NAME "banking")
 
 add_executable(test src/test.cpp)
