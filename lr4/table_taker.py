@@ -25,12 +25,13 @@ balances: list[float] = [
     get_value(ws.cell(row=i, column=2).value) for i in range(3, 22)
 ]
 
-sorted_bal: list[float] = sorted(balances, reverse=True)
+sorted_cb = sorted(list(zip(clients, balances)), reverse=True, key=lambda item: item[1])
 
 print(f"{'Client':<10} {' ':>5} {'Balance':>10}")
 for cli, bal in zip(clients, balances):
     print(f"{cli:<10} {'-':>5} {bal:>10}")
 
-ws.cell(row=1, column=3, value=sorted_bal[0])
+ws.cell(row=1, column=3, value=sorted_cb[0][0])
+ws.cell(row=2, column=3, value=sorted_cb[0][1])
 wb.save("bank_cool_data.xlsx")
-print("The richest client in cell C1 is: " + str(ws["C1"].value))
+print("The richest client is: " + str((ws["C1"]).value) + " - " + str(ws["C2"].value))
